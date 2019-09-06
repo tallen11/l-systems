@@ -29,7 +29,7 @@ Grammars are parsed according to the following grammar (it's grammars all the wa
 ```
 Grammar -> Rule*
 Rule -> ID '->' Production
-	  | ID '(' Probability ')' '->' Production
+	| ID '(' Probability ')' '->' Production
 
 Production -> ID+
 ID -> <character>
@@ -67,10 +67,10 @@ FX+YF++-FX-YF++-FX+YF+--FX-YF++-FX+YF++-FX-YF+--FX+YF+--FX-YF+
 ```
 
 ---
-## TODO
-- Disallow duplicate rules in grammar
-- Allow comments in grammars
-- Allow context sensitive rules in grammars
-- Build static library for embedding in other programs
-- Use better RNG than rand()
+### TODO
+- Disallow duplicate rules in grammars.
+- Allow comments in grammars.
+- Allow context sensitive rules in grammars.
+- Build static library for embedding in other programs.
+- Use better RNG than rand().
 
