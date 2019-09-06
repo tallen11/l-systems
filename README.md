@@ -83,15 +83,15 @@ def setup():
     global L
     for c in L:
         if c == "F":
-			# Draw line in current direction
+		    # Draw line in current direction
             next = PVector(pos.x + step_size*cos(angle), pos.y + step_size*sin(angle))
             line(pos.x, pos.y, next.x, next.y)
             pos = next
         elif c == "-":
-			# Rotate left 90 degrees
+		    # Rotate left 90 degrees
             angle += PI / 2.0
         elif c == "+":
-			# Rotate right 90 degrees
+		    # Rotate right 90 degrees
             angle -= PI / 2.0
 ```
 ![Generated Dragon Curve](demo/output.png)
