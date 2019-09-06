@@ -6,13 +6,14 @@
 #define L_SYSTEM_PARSER_ENGINE_H
 
 #include "Parser.h"
+#include "Error.h"
 
 namespace lsys {
 
     class Engine {
     public:
         explicit Engine(const RuleMap& rules);
-        ~Engine();
+        ~Engine() = default;
 
         [[nodiscard]] std::string expand(const std::string& str) const;
 

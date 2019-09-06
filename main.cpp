@@ -4,6 +4,7 @@
 #include "Util.h"
 #include "Lexer.h"
 #include "Parser.h"
+#include "Engine.h"
 
 void reportError(const lsys::Error& error, const std::string& grammarSource) {
     std::cout << "[Error]: " << error.getMessage() << std::endl;
@@ -30,7 +31,12 @@ void reportError(const lsys::Error& error, const std::string& grammarSource) {
 }
 
 int main(int argc, char** argv) {
-    std::ifstream file("../test/grammar.txt");
+    if (argc != 4) {
+        std::cout << "Usage: lsys <grammar path> <iterations> <axiom>" << std::endl;
+        return 1;
+    }
+
+    std::ifstream file(argv[1]);
     if (!file.is_open()) {
         std::cout << "Failed opening file." << std::endl;
         return 1;
@@ -65,11 +71,28 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    auto rules = parser.getRules();
-    for (auto& pair : rules) {
-        std::cout << pair.first << std::endl;
-        std::cout << pair.second->toString() << std::endl;
+    int iterations = 0;
+    try {
+        iterations = std::stoi(argv[2]);
+    } catch (...) {
+        std::cout << "Failed parsing iterations. Please supply a positive integer." << std::endl;
+        return 1;
     }
+
+    lsys::Engine engine(parser.getRules());
+
+    std::string result = std::string(argv[3]);
+    for (int i = 0; i < iterations; ++i) {
+        result = engine.expand(result);
+    }
+
+    std::cout << result << std::endl;
+
+//    auto rules = parser.getRules();
+//    for (auto& pair : rules) {
+//        std::cout << pair.first << std::endl;
+//        std::cout << pair.second->toString() << std::endl;
+//    }
 
     return 0;
 }
