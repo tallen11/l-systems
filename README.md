@@ -68,6 +68,34 @@ Output
 FX+YF++-FX-YF++-FX+YF+--FX-YF++-FX+YF++-FX-YF+--FX+YF+--FX-YF+
 ```
 
+You can then use the resulting strings anywhere you want. For example, this [Processing Python](https://py.processing.org/) script will draw the actual dragon curve based on the generated string
+``` Python
+# Our generated string
+L = "FX+YF++-FX-YF++-FX+YF+--FX-YF++-FX+YF++-FX-YF+--FX+YF+--FX-YF+"
+
+def setup():
+    size(256, 256)
+    
+    step_size = 20.0
+    angle = 0.0
+    pos = PVector(width / 2.0, height / 2.0)
+    
+    global L
+    for c in L:
+        if c == "F":
+			# Draw line in current direction
+            next = PVector(pos.x + step_size*cos(angle), pos.y + step_size*sin(angle))
+            line(pos.x, pos.y, next.x, next.y)
+            pos = next
+        elif c == "-":
+			# Rotate left 90 degrees
+            angle += PI / 2.0
+        elif c == "+":
+			# Rotate right 90 degrees
+            angle -= PI / 2.0
+```
+![Generated Dragon Curve](demo/output.png)
+
 ---
 ### TODO
 - Disallow duplicate rules in grammars.
