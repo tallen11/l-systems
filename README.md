@@ -29,7 +29,7 @@ Grammars are parsed according to the following grammar (it's grammars all the wa
 ```
 Grammar -> Rule*
 Rule -> ID '->' Production
-	| ID '(' Probability ')' '->' Production
+       | ID '(' Probability ')' '->' Production
 
 Production -> ID+
 ID -> <character>
