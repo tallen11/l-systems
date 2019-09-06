@@ -56,7 +56,7 @@ namespace lsys {
         } else {
             std::stringstream ss;
             ss << "Expected '" << second << "' after '" << first << "'";
-            throw LexError(ss.str(), m_line);
+            throw Error(ss.str(), m_line);
         }
     }
 
@@ -78,9 +78,9 @@ namespace lsys {
             double value = std::stod(ss.str());
             m_tokens.emplace_back(TokenType::Number, TokenLiteral::number(value), m_line);
         } catch (const std::invalid_argument& e) {
-            throw LexError("Failed parsing invalid number", m_line);
+            throw Error("Failed parsing invalid number", m_line);
         } catch (const std::out_of_range& e) {
-            throw LexError("Parsed number was out of range", m_line);
+            throw Error("Parsed number was out of range", m_line);
         }
     }
 

@@ -11,23 +11,11 @@
 
 #include "Token.h"
 #include "Rule.h"
+#include "Error.h"
 
 namespace lsys {
 
     using RuleMap = std::unordered_map<char, std::shared_ptr<Rule>>;
-
-    class ParseError: std::exception {
-    public:
-        ParseError(const std::string& message, int line) : m_message(message), m_line(line) { }
-        ~ParseError() override = default;
-
-        [[nodiscard]] std::string getMessage() const { return m_message; }
-        [[nodiscard]] int getLine() const { return m_line; }
-
-    private:
-        std::string m_message;
-        int m_line;
-    };
 
     class Parser {
     public:

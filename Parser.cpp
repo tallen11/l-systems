@@ -64,7 +64,7 @@ namespace lsys {
 
         std::stringstream ss;
         ss << "Unexpected token " << m_tokens[m_current].toString();
-        throw ParseError(ss.str(), m_tokens[m_current].getLine());
+        throw Error(ss.str(), m_tokens[m_current].getLine());
     }
 
     Token Parser::peekCurrent() const {

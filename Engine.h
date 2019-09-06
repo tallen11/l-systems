@@ -5,15 +5,19 @@
 #ifndef L_SYSTEM_PARSER_ENGINE_H
 #define L_SYSTEM_PARSER_ENGINE_H
 
+#include "Parser.h"
+
 namespace lsys {
 
     class Engine {
     public:
-        Engine();
+        explicit Engine(const RuleMap& rules);
         ~Engine();
 
-    private:
+        [[nodiscard]] std::string expand(const std::string& str) const;
 
+    private:
+        RuleMap m_rules;
     };
 }
 

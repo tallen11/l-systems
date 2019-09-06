@@ -8,18 +8,9 @@
 #include <vector>
 
 #include "Token.h"
+#include "Error.h"
 
 namespace lsys {
-
-    class LexError : public std::exception {
-    public:
-        LexError(const std::string &message, int line) : m_message(message), m_line(line) {}
-        ~LexError() override = default;
-
-    private:
-        std::string m_message;
-        int m_line;
-    };
 
     class Lexer {
     public:

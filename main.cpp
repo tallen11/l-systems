@@ -1,10 +1,19 @@
 #include <iostream>
 #include <fstream>
 
+#include "Util.h"
 #include "Lexer.h"
 #include "Parser.h"
 
-int main() {
+void reportError(const lsys::Error& error, const std::string& grammarSource) {
+    std::cout << "[Error]: " << error.getMessage() << std::endl;
+    if (error.getLine()) {
+        std::string line = split(grammarSource, '\n')[error.getLine().value()-1];
+        std::cout << "\t" << error.getLine().value() << ".\t" << line << std::endl;
+    }
+}
+
+int main(int argc, char** argv) {
     std::ifstream file("../test/grammar.txt");
     if (!file.is_open()) {
         std::cout << "Failed opening file." << std::endl;
@@ -20,21 +29,23 @@ int main() {
 
     file.close();
 
-    lsys::Lexer lexer(ss.str());
-    lexer.lex();
+    std::string grammarSource = ss.str();
+
+    lsys::Lexer lexer(grammarSource);
+    try {
+        lexer.lex();
+    } catch (const lsys::Error& error) {
+        reportError(error, grammarSource);
+        return 1;
+    }
 
     auto tokens = lexer.getTokens();
-
-    for (auto& t : tokens) {
-        std::cout << t.toString() << " ";
-    }
-    std::cout << std::endl;
 
     lsys::Parser parser(tokens);
     try {
         parser.parse();
-    } catch (const lsys::ParseError& error) {
-        std::cout << "[Parser line " << error.getLine() << "]: " << error.getMessage();
+    } catch (const lsys::Error& error) {
+        reportError(error, grammarSource);
         return 1;
     }
 
