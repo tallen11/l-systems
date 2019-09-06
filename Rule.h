@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 namespace lsys {
 
@@ -53,7 +54,7 @@ namespace lsys {
         [[nodiscard]] std::string produce() const {
             double low = m_branches[0].getProbability();
             double high = m_branches[m_branches.size() - 1].getProbability();
-            double p = low + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX/(high-low)));
+            double p = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / high));
             for (auto& branch : m_branches) {
                 if (p <= branch.getProbability()) {
                     return branch.produce();

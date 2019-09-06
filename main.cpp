@@ -51,6 +51,8 @@ int main(int argc, char** argv) {
 
     file.close();
 
+    srand(time(NULL));
+
     std::string grammarSource = ss.str();
 
     lsys::Lexer lexer(grammarSource);
