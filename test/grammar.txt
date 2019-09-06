@@ -1,2 +1,2 @@
-X -> X+YF+
-Y -> -FX-Y
+X -> F-[[X]+X]+F[+FX]-X
+F -> FF
