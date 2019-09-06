@@ -24,16 +24,15 @@ namespace lsys {
             Token varToken = match(TokenType::Identifier);
             char varName = varToken.getLiteral().charValue;
 
-            Rule* rule;
+            std::shared_ptr<Rule> rule;
             if (m_rules.count(varName) == 0) {
-                rule = new Rule();
+                rule = std::make_shared<Rule>();
                 m_rules.insert(std::pair(varName, rule));
             } else {
                 rule = m_rules[varName];
             }
 
             double probability = 1.0;
-//            std::cout << peekCurrent().toString() << std::endl;
             if (peekCurrent().getType() == TokenType::OpenParen) {
                 match(TokenType::OpenParen);
                 Token probToken = match(TokenType::Number);

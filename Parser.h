@@ -7,11 +7,14 @@
 
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 #include "Token.h"
 #include "Rule.h"
 
 namespace lsys {
+
+    using RuleMap = std::unordered_map<char, std::shared_ptr<Rule>>;
 
     class ParseError: std::exception {
     public:
@@ -33,16 +36,17 @@ namespace lsys {
 
         void parse();
 
-        [[nodiscard]] std::unordered_map<char, Rule*> getRules() const { return m_rules; }
+        [[nodiscard]] RuleMap getRules() const { return m_rules; }
 
     private:
         Token match(TokenType type);
+
         [[nodiscard]] Token peekCurrent() const;
         [[nodiscard]] bool isFinished() const;
 
         std::vector<Token> m_tokens;
         int m_current;
-        std::unordered_map<char, Rule*> m_rules;
+        RuleMap m_rules;
     };
 }
 
