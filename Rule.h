@@ -15,8 +15,8 @@ namespace lsys {
         explicit RuleBranch(const std::string& production) : m_probability(1.0), m_production(production) { }
         RuleBranch(const std::string& production, double probability) : m_production(production), m_probability(probability) { }
 
-        double getProbability() const { return m_probability; }
-        std::string produce() const { return m_production; }
+        [[nodiscard]] double getProbability() const { return m_probability; }
+        [[nodiscard]] std::string produce() const { return m_production; }
 
         void setProbability(double probability) { m_probability = probability; }
 
@@ -50,7 +50,7 @@ namespace lsys {
             }
         }
 
-        std::string produce() const {
+        [[nodiscard]] std::string produce() const {
             double low = m_branches[0].getProbability();
             double high = m_branches[m_branches.size() - 1].getProbability();
             double p = low + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX/(high-low)));
@@ -63,7 +63,7 @@ namespace lsys {
             return m_branches[m_branches.size() - 1].produce();
         }
 
-        std::string toString() const {
+        [[nodiscard]] std::string toString() const {
             std::stringstream ss;
             for (auto& branch : m_branches) {
                 ss << "( " << branch.getProbability() << " ) -> " << branch.produce() << std::endl;

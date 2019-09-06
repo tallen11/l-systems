@@ -14,8 +14,7 @@ namespace lsys {
     class LexError : public std::exception {
     public:
         LexError(const std::string &message, int line) : m_message(message), m_line(line) {}
-
-        ~LexError() = default;
+        ~LexError() override = default;
 
     private:
         std::string m_message;
@@ -36,7 +35,7 @@ namespace lsys {
         void lexIdentifier();
         void lexNumber();
 
-        bool isFinished() const;
+        [[nodiscard]] bool isFinished() const;
 
         std::string m_source;
         std::vector<Token> m_tokens;

@@ -36,23 +36,19 @@ namespace lsys {
 
     class Token {
     public:
-        Token(TokenType type, int line) : m_type(type), m_line(line) { }
-
+        Token(TokenType type, int line) : m_type(type), m_line(line), m_literal({}) { }
         Token(TokenType type, TokenLiteral literal, int line) : m_type(type), m_literal(literal), m_line(line) { }
-
         ~Token() = default;
 
-        TokenType getType() const { return m_type; }
-        TokenLiteral getLiteral() const { return m_literal; }
-        int getLine() const { return m_line; }
-        std::string toString() const {
+        [[nodiscard]] TokenType getType() const { return m_type; }
+        [[nodiscard]] TokenLiteral getLiteral() const { return m_literal; }
+        [[nodiscard]] int getLine() const { return m_line; }
+
+        [[nodiscard]] std::string toString() const {
             switch (m_type) {
-                case TokenType::Arrow:
-                    return "->";
-                case TokenType::OpenParen:
-                    return "(";
-                case TokenType::ClosedParen:
-                    return ")";
+                case TokenType::Arrow: return "->";
+                case TokenType::OpenParen: return "(";
+                case TokenType::ClosedParen: return ")";
                 case TokenType::Identifier: {
                     std::stringstream ss;
                     ss << '\'' << m_literal.charValue << '\'';

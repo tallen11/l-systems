@@ -18,8 +18,8 @@ namespace lsys {
         ParseError(const std::string& message, int line) : m_message(message), m_line(line) { }
         ~ParseError() override = default;
 
-        std::string getMessage() const { return m_message; }
-        int getLine() const { return m_line; }
+        [[nodiscard]] std::string getMessage() const { return m_message; }
+        [[nodiscard]] int getLine() const { return m_line; }
 
     private:
         std::string m_message;
@@ -33,12 +33,12 @@ namespace lsys {
 
         void parse();
 
-        std::unordered_map<char, Rule*> getRules() const { return m_rules; }
+        [[nodiscard]] std::unordered_map<char, Rule*> getRules() const { return m_rules; }
 
     private:
         Token match(TokenType type);
-        Token peekCurrent() const;
-        bool isFinished() const;
+        [[nodiscard]] Token peekCurrent() const;
+        [[nodiscard]] bool isFinished() const;
 
         std::vector<Token> m_tokens;
         int m_current;
