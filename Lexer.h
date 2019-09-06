@@ -22,7 +22,7 @@ namespace lsys {
 
     private:
         void lexSingleCharToken(TokenType type);
-        void lexTwoCharToken(TokenType type, char first, char second);
+        void lexTwoCharTokenOrID(TokenType doubleType, char first, char second);
         void lexIdentifier();
         void lexNumber();
 

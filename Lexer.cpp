@@ -21,7 +21,7 @@ namespace lsys {
                 case '(': lexSingleCharToken(TokenType::OpenParen);break;
                 case ')': lexSingleCharToken(TokenType::ClosedParen); break;
 
-                case '-': lexTwoCharToken(TokenType::Arrow, '-', '>'); break;
+                case '-': lexTwoCharTokenOrID(TokenType::Arrow, '-', '>'); break;
 
                 case ' ':
                 case '\t':
@@ -51,14 +51,13 @@ namespace lsys {
         next(1);
     }
 
-    void Lexer::lexTwoCharToken(TokenType type, char first, char second) {
+    void Lexer::lexTwoCharTokenOrID(TokenType doubleType, char first, char second) {
         if (m_current + 1 < m_source.size() && m_source[m_current + 1] == second) {
-            m_tokens.emplace_back(type, m_line, m_column);
+            m_tokens.emplace_back(doubleType, m_line, m_column);
             next(2);
         } else {
-            std::stringstream ss;
-            ss << "Expected '" << second << "' after '" << first << "'";
-            throw Error(ss.str(), m_line, m_column);
+            m_tokens.emplace_back(TokenType::Identifier, TokenLiteral::identifier(first), m_line, m_column);
+            next(1);
         }
     }
 
