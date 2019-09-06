@@ -26,12 +26,15 @@ namespace lsys {
         void lexIdentifier();
         void lexNumber();
 
+        void next(int amount);
+
         [[nodiscard]] bool isFinished() const;
 
         std::string m_source;
         std::vector<Token> m_tokens;
         int m_current;
         int m_line;
+        int m_column;
     };
 }
 

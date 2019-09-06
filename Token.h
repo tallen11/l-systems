@@ -36,13 +36,14 @@ namespace lsys {
 
     class Token {
     public:
-        Token(TokenType type, int line) : m_type(type), m_line(line), m_literal({}) { }
-        Token(TokenType type, TokenLiteral literal, int line) : m_type(type), m_literal(literal), m_line(line) { }
+        Token(TokenType type, int line, int col) : m_type(type), m_line(line), m_column(col), m_literal({}) { }
+        Token(TokenType type, TokenLiteral literal, int line, int col) : m_type(type), m_literal(literal), m_line(line), m_column(col) { }
         ~Token() = default;
 
         [[nodiscard]] TokenType getType() const { return m_type; }
         [[nodiscard]] TokenLiteral getLiteral() const { return m_literal; }
         [[nodiscard]] int getLine() const { return m_line; }
+        [[nodiscard]] int getColumn() const { return m_column; }
 
         [[nodiscard]] std::string toString() const {
             switch (m_type) {
@@ -67,6 +68,7 @@ namespace lsys {
         TokenType m_type;
         TokenLiteral m_literal;
         int m_line;
+        int m_column;
     };
 }
 

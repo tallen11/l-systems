@@ -7,9 +7,25 @@
 
 void reportError(const lsys::Error& error, const std::string& grammarSource) {
     std::cout << "[Error]: " << error.getMessage() << std::endl;
-    if (error.getLine()) {
+    if (error.getLine() && error.getColumn()) {
+        std::stringstream ss;
+        ss << error.getLine().value() << ".";
+
+        std::string lineNumberStr = ss.str();
+
         std::string line = split(grammarSource, '\n')[error.getLine().value()-1];
-        std::cout << "\t" << error.getLine().value() << ".\t" << line << std::endl;
+        std::cout << "\t" << lineNumberStr << "\t" << line << std::endl;
+        std::cout << "\t";
+        for (int i = 0; i < lineNumberStr.size(); ++i) {
+            std::cout << " ";
+        }
+
+        std::cout << "\t";
+        for (int i = 0; i < error.getColumn().value(); ++i) {
+            std::cout << " ";
+        }
+
+        std::cout << "^ error location (" << error.getLine().value() << ", " << error.getColumn().value() << ")" << std::endl;
     }
 }
 

@@ -57,14 +57,15 @@ namespace lsys {
     }
 
     Token Parser::match(TokenType type) {
-        if (m_tokens[m_current].getType() == type) {
+        Token cur = peekCurrent();
+        if (cur.getType() == type) {
             m_current += 1;
             return m_tokens[m_current - 1];
         }
 
         std::stringstream ss;
-        ss << "Unexpected token " << m_tokens[m_current].toString();
-        throw Error(ss.str(), m_tokens[m_current].getLine());
+        ss << "Unexpected token " << cur.toString();
+        throw Error(ss.str(), cur.getLine(), cur.getColumn());
     }
 
     Token Parser::peekCurrent() const {
