@@ -40,6 +40,7 @@ Probability -> <number>
 - IDs can only be a single character long as of now.
 - The order of rules specified in your grammars doesn't matter.
 - Rules have the following format: `ID -> Production`
+- Grammars may contain line comments starting with `#`.
 - To specify different probabilities for a variable, use the syntax: `ID (Probability) -> Production`. If no probability is specified, the probability for the rule is defaulted to 1. Probabilities aren't truly probabilities that must lie between 0 and 1, rather it's their ratios that matter. i.e. 
   ```
   X (0.5) -> abc
@@ -55,6 +56,8 @@ Probability -> <number>
 #### Example
 Grammar *dragon_curve.txt*
 ```
+# Generate steps to draw a dragon curve
+
 X -> X+YYF+
 Y -> -FX-Y
 ```
