@@ -98,7 +98,6 @@ def setup():
 
 ---
 ### TODO
-- Disallow duplicate rules in grammars.
 - ~~Allow comments in grammars.~~
 - Allow context sensitive rules in grammars.
 - Build static library for embedding in other programs.
