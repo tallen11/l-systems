@@ -1,0 +1,5 @@
+# Generates a plant looking thing
+
+X -> F-[[X]+X]+F[+FX]-X
+F -> FF
+

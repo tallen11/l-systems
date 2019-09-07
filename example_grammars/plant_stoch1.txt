@@ -1,0 +1,8 @@
+# Stochastic plant
+# Each F rule has equal chance of
+# being chosen ~33% chance.
+
+F -> F[+F]F[-F]F
+F -> F[+F]F
+F -> F[-F]F
+
