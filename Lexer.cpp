@@ -23,6 +23,18 @@ namespace lsys {
 
                 case '-': lexTwoCharTokenOrID(TokenType::Arrow, '-', '>'); break;
 
+                case '#': {
+                    m_current += 1;
+                    while (m_source[m_current] != '\n') {
+                        m_current += 1;
+                    }
+
+                    m_line += 1;
+                    m_column = 0;
+                    next(1);
+                    break;
+                }
+
                 case ' ':
                 case '\t':
                     next(1);
