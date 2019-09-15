@@ -4,6 +4,7 @@ Simple l-systems grammar parser and string generator
 This is a simple command line program written in C++17 that takes in a grammar file, an iteration count and an axiom and generates a string from the grammar rules. It also allows you to create stochastic l-systems (https://en.wikipedia.org/wiki/L-system).
 
 ![Demo](demo/demo_gif.gif)
+![Example](demo/out.png)
 
 ### Building & Running
 This project uses CMake, so clone the project, then from its root directory run
